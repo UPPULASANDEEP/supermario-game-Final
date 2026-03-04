@@ -24,17 +24,20 @@ git clone https://github.com/akshu20791/supermario-game
 ls
 cd supermario-game
 cd EKS-TF
-
+change nano main.tf to instance type
 vim backend.tf
 terraform init
 terraform validate
 
 terraform plan 
-
-terraform import aws_iam_role.example eks-cluster-cloud
-terraform import aws_iam_role.example1 eks-node-group-cloud
-terraform plan
 terraform apply
 
 aws eks update-kubeconfig --name EKS_CLOUD --region us-east-1
+cd ..
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get all
+kubectl describe service mario-service
+
+
 
