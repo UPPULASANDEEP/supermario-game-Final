@@ -1,3 +1,7 @@
+cd /home/ubuntu/supermario/supermario-game/EKS-TF
+
+
+
 sudo su 
 apt update
 apt install docker.io
