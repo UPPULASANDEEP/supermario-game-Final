@@ -1,1 +1,40 @@
+sudo su 
+apt update
+apt install docker.io
+usermod -aG docker ubuntu
+newgrp docker
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+apt install unzip -y
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+sudo apt install curl -y
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+
+
+
+mkdir supermario
+cd supermario
+git clone https://github.com/akshu20791/supermario-game
+ls
+cd supermario-game
+cd EKS-TF
+
+vim backend.tf
+terraform init
+terraform validate
+
+terraform plan 
+
+terraform import aws_iam_role.example eks-cluster-cloud
+terraform import aws_iam_role.example1 eks-node-group-cloud
+terraform plan
+terraform apply
+
+aws eks update-kubeconfig --name EKS_CLOUD --region us-east-1
 
