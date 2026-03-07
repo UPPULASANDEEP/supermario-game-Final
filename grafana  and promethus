@@ -1,0 +1,46 @@
+sudo su
+apt update
+wget https://dl.grafana.com/enterprise/release/grafana-enterprise-8.4.4.linux-amd64.tar.gz
+ls
+tar -zxvf grafana-enterprise-8.4.4.linux-amd64.tar.gz
+ls
+cd grafana-8.4.4
+./bin/grafana-server
+
+
+apt update 
+apt install docker.io -y
+service docker start
+docker run -dt  ubuntu 
+wget https://github.com/prometheus/prometheus/releases/download/v2.34.0/prometheus-2.34.0.linux-amd64.tar.gz
+ls
+tar zxvf prometheus-2.34.0.linux-amd64.tar.gzls
+cd prometheus-2.34.0.linux-amd64
+ls
+vi /etc/docker/daemon.json
+press I to insert
+{
+        "metrics-addr" : "0.0.0.0:9323",
+        "experimental" : true
+}
+service docker restart
+cd prometheus-2.34.0.linux-amd64
+ls
+vi prometheus.yml
+- job_name: "docker"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["localhost:9323"]
+  ./prometheus
+
+
+
+  engine_daemon_container_states_containers{state="stopped"}
+
+  engine_daemon_container_states_containers{state="running"}
+  
+https://grafana.com/grafana/dashboards/21040-docker-daemons/
+
